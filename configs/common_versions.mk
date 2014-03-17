@@ -1,53 +1,53 @@
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
 
-DATE = $(shell vendor/aicp/tools/getdate)
-AICP_BRANCH=kitkat
+DATE = $(shell vendor/dominus/tools/getdate)
+DOMINUS_BRANCH=gzokp
 
-# AICP RELEASE VERSION
-AICP_VERSION_MAJOR = 3
-AICP_VERSION_MINOR = 5
-AICP_VERSION_MAINTENANCE =
+# DOMINUS RELEASE VERSION
+DOMINUS_VERSION_MAJOR = 3
+DOMINUS_VERSION_MINOR = 5
+DOMINUS_VERSION_MAINTENANCE =
 
-VERSION := $(AICP_VERSION_MAJOR).$(AICP_VERSION_MINOR)$(AICP_VERSION_MAINTENANCE)
+VERSION := $(DOMINUS_VERSION_MAJOR).$(DOMINUS_VERSION_MINOR)$(DOMINUS_VERSION_MAINTENANCE)
 
-ifndef AICP_BUILD
+ifndef DOMINUS_BUILD
     ifdef RELEASE_TYPE
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^AICP_||g')
-        AICP_BUILD := $(RELEASE_TYPE)
+        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^DOMINUS_||g')
+        DOMINUS_BUILD := $(RELEASE_TYPE)
     else
-        AICP_BUILD := UNOFFICIAL
+        DOMINUS_BUILD := UNOFFICIAL
     endif
 endif
 
-ifdef AICP_BUILD
-    ifeq ($(AICP_BUILD), RELEASE)
-       AICP_VERSION := $(TARGET_PRODUCT)_$(AICP_BRANCH)-$(VERSION)-RELEASE-$(shell date -u +%Y%m%d)
+ifdef DOMINUS_BUILD
+    ifeq ($(DOMINUS_BUILD), RELEASE)
+       DOMINUS_VERSION := $(TARGET_PRODUCT)_$(DOMINUS_BRANCH)-$(VERSION)-RELEASE-$(shell date -u +%Y%m%d)
     endif
-    ifeq ($(AICP_BUILD), NIGHTLY)
-        AICP_VERSION := $(TARGET_PRODUCT)_$(AICP_BRANCH)-$(VERSION)-NIGHTLY-$(shell date -u +%Y%m%d)
+    ifeq ($(DOMINUS_BUILD), NIGHTLY)
+        DOMINUS_VERSION := $(TARGET_PRODUCT)_$(DOMINUS_BRANCH)-$(VERSION)-NIGHTLY-$(shell date -u +%Y%m%d)
     endif
-    ifeq ($(AICP_BUILD), EXPERIMENTAL)
-        AICP_VERSION := $(TARGET_PRODUCT)_$(AICP_BRANCH)-$(VERSION)-EXPERIMENTAL-$(shell date -u +%Y%m%d)
+    ifeq ($(DOMINUS_BUILD), EXPERIMENTAL)
+        DOMINUS_VERSION := $(TARGET_PRODUCT)_$(DOMINUS_BRANCH)-$(VERSION)-EXPERIMENTAL-$(shell date -u +%Y%m%d)
     endif
-    ifeq ($(AICP_BUILD), UNOFFICIAL)
-        AICP_VERSION := $(TARGET_PRODUCT)_$(AICP_BRANCH)-$(VERSION)-UNOFFICIAL-$(shell date -u +%Y%m%d)
+    ifeq ($(DOMINUS_BUILD), UNOFFICIAL)
+        DOMINUS_VERSION := $(TARGET_PRODUCT)_$(DOMINUS_BRANCH)-$(VERSION)-UNOFFICIAL-$(shell date -u +%Y%m%d)
     endif
 else
 #We reset back to UNOFFICIAL
-        AICP_VERSION := $(TARGET_PRODUCT)_$(AICP_BRANCH)-$(VERSION)-UNOFFICIAL-$(shell date -u +%Y%m%d)
+        DOMINUS_VERSION := $(TARGET_PRODUCT)_$(DOMINUS_BRANCH)-$(VERSION)-UNOFFICIAL-$(shell date -u +%Y%m%d)
 endif
 
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=$(AICP_VERSION) \
-    ro.aicp.version=$(VERSION)-$(AICP_BUILD)
+    ro.modversion=$(DOMINUS_VERSION) \
+    ro.dominus.version=$(VERSION)-$(DOMINUS_BUILD)
 
 # needed for statistics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.aicp.branch=$(AICP_BRANCH) \
-    ro.aicp.device=$(AICP_PRODUCT)
+    ro.dominus.branch=$(DOMINUS_BRANCH) \
+    ro.dominus.device=$(DOMINUS_PRODUCT)
 
 # Camera shutter sound property
 PRODUCT_PROPERTY_OVERRIDES += \

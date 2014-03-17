@@ -1,5 +1,5 @@
 BOARD_SEPOLICY_DIRS += \
-    vendor/aicp/sepolicy
+    vendor/dominus/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file.te \
